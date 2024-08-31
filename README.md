@@ -25,6 +25,8 @@
 ![image](https://github.com/user-attachments/assets/dbee599c-d98e-44ea-b863-7f099e70eb58)
 - Resultado no debug:
 ![image](https://github.com/user-attachments/assets/e2d99eb4-385f-43d3-93dc-d9f32b9ffbdd)
+- Imagem circuito físico:
+![WhatsApp Image 2024-08-30 at 22 27 48](https://github.com/user-attachments/assets/2d514c97-3bd7-4749-abe5-8734be829e16)
 
 
 ### Código Fahrenheit
