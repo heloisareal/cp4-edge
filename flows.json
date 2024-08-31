@@ -1,0 +1,935 @@
+[
+    {
+        "id": "e3ecc19c3b601239",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "963e0ccd5cc1e9b0",
+        "type": "inject",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 260,
+        "wires": [
+            [
+                "e7d238264068af93",
+                "114cd9d0d6903cd9"
+            ]
+        ]
+    },
+    {
+        "id": "45353ddca6f41cd6",
+        "type": "debug",
+        "z": "e3ecc19c3b601239",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e7d238264068af93",
+        "type": "http request",
+        "z": "e3ecc19c3b601239",
+        "name": "Jarinú http request",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=-23.1171&lon=-46,6846&appid=a669c7581a465a7a7c6ca5cea61e378f&units=metric",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "6970ab159fea7cb9"
+            ]
+        ]
+    },
+    {
+        "id": "6970ab159fea7cb9",
+        "type": "json",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "45353ddca6f41cd6",
+                "f1127a2d6bf745a0",
+                "6238ca03e9418375",
+                "93ca8c93f94da6c8",
+                "797473d4af84a3a6",
+                "a9d92c7161bc9566"
+            ]
+        ]
+    },
+    {
+        "id": "7215ad479ed7976c",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Temperatura",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.tempFahrenheit",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 60,
+        "wires": [
+            [
+                "cb05e447906a4992"
+            ]
+        ]
+    },
+    {
+        "id": "cb05e447906a4992",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "754984158aad6fad",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "compass",
+        "title": "Temperatura",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f1127a2d6bf745a0",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Pressão",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.pressure",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 140,
+        "wires": [
+            [
+                "111e92b4f0e104f2"
+            ]
+        ]
+    },
+    {
+        "id": "111e92b4f0e104f2",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "aeb6a996e6aa6758",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Pressão",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 620,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6238ca03e9418375",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Nuvens",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.clouds.all",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "1fba1be1859255c0"
+            ]
+        ]
+    },
+    {
+        "id": "1fba1be1859255c0",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "aeb6a996e6aa6758",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nuvens",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 620,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "93ca8c93f94da6c8",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Nível da terra",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.grnd_level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "6805d6fe2e2d8e19"
+            ]
+        ]
+    },
+    {
+        "id": "6805d6fe2e2d8e19",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "de7821875457ecc4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nível da Terra",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 660,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "797473d4af84a3a6",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Nível do Mar",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.sea_level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "608cc08b29de70f4"
+            ]
+        ]
+    },
+    {
+        "id": "608cc08b29de70f4",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "de7821875457ecc4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nível do Mar",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "14083aa974cc530d",
+        "type": "debug",
+        "z": "e3ecc19c3b601239",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "114cd9d0d6903cd9",
+        "type": "http request",
+        "z": "e3ecc19c3b601239",
+        "name": "Bragança http request",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=-22.9523&lon=-46.5425&appid=a669c7581a465a7a7c6ca5cea61e378f&units=metric",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "79e6c088462962d8"
+            ]
+        ]
+    },
+    {
+        "id": "79e6c088462962d8",
+        "type": "json",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 420,
+        "wires": [
+            [
+                "14083aa974cc530d",
+                "2f050d8a3897b306",
+                "779f7d4c70dd117c",
+                "73a1167b436d98a5",
+                "8f3808fe52273b08",
+                "4a821dc4efba153f"
+            ]
+        ]
+    },
+    {
+        "id": "41c0a208b2e2eb1b",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Temperatura",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.tempFahrenheit",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "dffbc5c01a3d6fef"
+            ]
+        ]
+    },
+    {
+        "id": "dffbc5c01a3d6fef",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "ac5ba89fc41f8a8d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "compass",
+        "title": "Temperatura",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2f050d8a3897b306",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Pressão",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.pressure",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 400,
+        "wires": [
+            [
+                "eb2a1c2b90f59e59"
+            ]
+        ]
+    },
+    {
+        "id": "eb2a1c2b90f59e59",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "630a4211e53f81d4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Pressão",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 620,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "779f7d4c70dd117c",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Nuvens",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.clouds.all",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "4b3006e0443749df"
+            ]
+        ]
+    },
+    {
+        "id": "4b3006e0443749df",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "630a4211e53f81d4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nuvens",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 620,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "73a1167b436d98a5",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Nível da terra",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.grnd_level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 520,
+        "wires": [
+            [
+                "664369a21ce9e68c"
+            ]
+        ]
+    },
+    {
+        "id": "664369a21ce9e68c",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "e734e563c6d0f635",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nível da Terra",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 660,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8f3808fe52273b08",
+        "type": "change",
+        "z": "e3ecc19c3b601239",
+        "name": "Nível do Mar",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.sea_level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 440,
+        "wires": [
+            [
+                "7a9f087043cf694b"
+            ]
+        ]
+    },
+    {
+        "id": "7a9f087043cf694b",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "e734e563c6d0f635",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Nível do Mar",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 630,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "39b26cd50cd2e004",
+        "type": "serial in",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "serial": "661266c45bf3ec19",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "4acb9621b879b292",
+                "111f18d35e7ac534"
+            ]
+        ]
+    },
+    {
+        "id": "4acb9621b879b292",
+        "type": "ui_gauge",
+        "z": "e3ecc19c3b601239",
+        "name": "",
+        "group": "df3ca5c09e6787c0",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Dist",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 450,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "111f18d35e7ac534",
+        "type": "debug",
+        "z": "e3ecc19c3b601239",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a9d92c7161bc9566",
+        "type": "function",
+        "z": "e3ecc19c3b601239",
+        "name": "function 1",
+        "func": "// Extrair a temperatura da resposta dada pela API\nlet tempCelsius = msg.payload.main.temp;\n\n// Convertendo a temp\nlet tempFahrenheit = (tempCelsius * 9 / 5) + 32;\n\n// Substituindo a temperatura no payload\nmsg.payload.tempFahrenheit = tempFahrenheit;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "7215ad479ed7976c"
+            ]
+        ]
+    },
+    {
+        "id": "4a821dc4efba153f",
+        "type": "function",
+        "z": "e3ecc19c3b601239",
+        "name": "function 2",
+        "func": "// Extrair a temperatura da resposta dada pela API\nlet tempCelsius = msg.payload.main.temp;\n\n// Convertendo a temp\nlet tempFahrenheit = (tempCelsius * 9 / 5) + 32;\n\n// Substituindo a temperatura no payload\nmsg.payload.tempFahrenheit = tempFahrenheit;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "41c0a208b2e2eb1b"
+            ]
+        ]
+    },
+    {
+        "id": "754984158aad6fad",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "4b3cc9a105e3590b",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "aeb6a996e6aa6758",
+        "type": "ui_group",
+        "name": "Ambiente",
+        "tab": "4b3cc9a105e3590b",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "de7821875457ecc4",
+        "type": "ui_group",
+        "name": "Níveis ",
+        "tab": "4b3cc9a105e3590b",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ac5ba89fc41f8a8d",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "d611fa47e1c7b0df",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "630a4211e53f81d4",
+        "type": "ui_group",
+        "name": "Ambiente",
+        "tab": "d611fa47e1c7b0df",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e734e563c6d0f635",
+        "type": "ui_group",
+        "name": "Níveis",
+        "tab": "d611fa47e1c7b0df",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "661266c45bf3ec19",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "COM5",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "df3ca5c09e6787c0",
+        "type": "ui_group",
+        "name": "Distância",
+        "tab": "e52c53cb8fb11308",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4b3cc9a105e3590b",
+        "type": "ui_tab",
+        "name": "Jarinú",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d611fa47e1c7b0df",
+        "type": "ui_tab",
+        "name": "Bragança Paulista",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e52c53cb8fb11308",
+        "type": "ui_tab",
+        "name": "Distância Arduino",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
